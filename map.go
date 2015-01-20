@@ -1,5 +1,9 @@
 package t
 
+import (
+	"encoding/json"
+)
+
 type Map map[string]interface{}
 
 func (this Map) Str(key string) (s string) {
@@ -34,5 +38,20 @@ func (this Map) T(key string) (t T) {
 	if val, ok := this[key]; ok {
 		t = T{val}
 	}
+	return
+}
+
+func (this Map) Map(key string) (m Map) {
+	if val, ok := this[key]; ok {
+		if tmp, ok := val.(map[string]interface{}); ok {
+			return Map(tmp)
+		}
+	}
+
+	return make(Map)
+}
+
+func (this Map) MarshalJSON() (b []byte, err error) {
+	b, err = json.Marshal(map[string]interface{}(this))
 	return
 }

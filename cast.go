@@ -32,6 +32,16 @@ func to_int(v interface{}) int {
 		return int(val)
 	case int8:
 		return int(val)
+	case uint:
+		return int(val)
+	case uint64:
+		return int(val)
+	case uint32:
+		return int(val)
+	case uint16:
+		return int(val)
+	case uint8:
+		return int(val)
 	case string:
 		if i, err := strconv.ParseInt(val, 10, 32); err == nil {
 			return int(i)
@@ -44,6 +54,8 @@ func to_int(v interface{}) int {
 
 func to_int64(v interface{}) int64 {
 	switch val := v.(type) {
+	case uint64:
+		return int64(val)
 	case int64:
 		return val
 	case string:
@@ -71,7 +83,7 @@ func to_uint(v interface{}) uint {
 			return uint(i)
 		}
 	default:
-		panic("T.Value type is not supported")
+		return uint(to_int(v))
 	}
 	return 0
 }

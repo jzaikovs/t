@@ -38,3 +38,14 @@ func (this T) MarshalJSON() (b []byte, err error) {
 func (this T) String() string {
 	return to_str(this.Value)
 }
+
+func (this T) Map() Map {
+	switch val := this.Value.(type) {
+	case Map:
+		return val
+	case map[string]interface{}:
+		return val
+	}
+
+	return Map{}
+}
