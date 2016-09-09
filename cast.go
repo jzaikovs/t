@@ -42,6 +42,10 @@ func to_int(v interface{}) int {
 		return int(val)
 	case uint8:
 		return int(val)
+	case float32:
+		return int(val)
+	case float64:
+		return int(val)
 	case string:
 		if i, err := strconv.ParseInt(val, 10, 32); err == nil {
 			return int(i)
@@ -58,6 +62,8 @@ func to_int64(v interface{}) int64 {
 		return int64(val)
 	case int64:
 		return val
+	case float64:
+		return int64(val)
 	case string:
 		if i, err := strconv.ParseInt(val, 10, 64); err == nil {
 			return i
